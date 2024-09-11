@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="http://fonts.cdnfonts.com/css/sf-pixelate" rel="stylesheet">
+    <title>Dinosaurio Brigadista</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            background: #584040;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            width: 100%;
+            background-color: #f8f9fa;
+            padding: 5px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 10px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .navbar-brand {
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .navbar-nav {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-item {
+            margin-left: 20px;
+        }
+
+        .nav-link {
+            font-size: 18px;
+            color: #333;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #007bff;
+        }
+
+        .contenedor {
+            width: 960px;
+            height: 360px;
+            position: relative;
+            background: linear-gradient(#b7d6c7 0%, transparent 60%, transparent 80%,  #6d757e 100%) #ffe2d1;
+            transition: background-color 1s linear;
+            overflow: hidden;
+            margin-top: 60px; /* Space for the navbar */
+        }
+
+        .mediodia {
+            background-color: #ffdcf3;
+        }
+
+        .tarde {
+            background-color: #ffadad;
+        }
+
+        .noche {
+            background-color: #aca8c7;
+        }
+
+        .dino {
+            width: 84px;
+            height: 84px;
+            position: absolute;
+            bottom: 50px;
+            left: 42px;
+            z-index: 2;
+            background: url(img/dino.png) repeat-x 0px 0px;
+            background-size: 336px 84px;
+            background-position-x: 0px;
+        }
+
+        .dino-corriendo {
+            animation: animarDino 0.25s steps(2) infinite;
+        }
+
+        .dino-estrellado {
+            background-position-x: -252px;
+        }
+
+        .suelo {
+            width: 200%;
+            height: 130px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            z-index: 3;
+            background: url(img/mar.png) repeat-x 0px 0px;
+            background-size: 48px 258px;
+            animation: oleaje 1.5s ease-in-out infinite;
+        }
+
+        .obstaculo {
+            width: 48px;
+            height: 48px;
+            position: absolute;
+            left: 600px;
+            z-index: 1;
+        }
+
+        .obstaculo-flotante {
+            bottom: 90px;
+            background: url(img/obstaculo2.png) no-repeat;
+            animation: abanear 1s ease-in-out infinite;
+        }
+
+        .obstaculo-hundido {
+            bottom: 0px;
+            background: url(img/obstaculo1.png) no-repeat;
+        }
+
+        .nube {
+            width: 92px;
+            height: 26px;
+            position: absolute;
+            z-index: 0;
+            background: url(img/nube.png) no-repeat;
+            background-size: 92px 26px;
+        }
+
+        .moneda {
+            width: 48px;
+            height: 48px;
+            position: absolute;
+            z-index: 1;
+            background: url(img/moneda.png) no-repeat center center;
+        }
+
+        .score {
+            width: 100px;
+            height: 30px;
+            position: absolute;
+            top: 5px;
+            right: 15px;
+            z-index: 10;
+            color: #d48871;
+            font-family: Verdana;
+            font-size: 30px;
+            font-weight: bold;
+            text-align: right;
+        }
+
+        .game-over {
+            display: none;
+            width: 100%;
+            position: absolute;
+            z-index: 10;
+            text-align: center;
+            color: #7e928b;
+            font-size: 30px;
+            font-family: Verdana;
+            font-weight: 700;
+        }
+
+        .btn-restart {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 10px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 11;
+        }
+
+        .btn-restart:hover {
+            background-color: #0056b3;
+        }
+
+        @keyframes animarDino {
+            from {
+                background-position-x: -84px;
+            }
+            to {
+                background-position-x: -252px;
+            }
+        }
+
+        @keyframes abanear {
+            0%, 100% {
+                bottom: 90px;
+            }
+            50% {
+                bottom: 84px;
+            }
+        }
+
+        @keyframes oleaje {
+            0%, 100% {
+                bottom: 0px;
+            }
+            50% {
+                bottom: -10px;
+            }
+        }
+    </style>
+</head>
+<header>
+    <nav>
+        <div class="container">
+            <h1 class="navbar-brand">PA-LUDICOS | Interactivos</h1>
+            <button class="navbar-toggler" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active"><a class="nav-link" href="home.php">Inicio</a></li>
+                <li class="nav-item active"><a class="nav-link" href="menu_games.html">Juegos</a></li>
+                <li class="nav-item"><a class="nav-link" href="nosotros.html">Nosotros</a></li>
+                <li class="nav-item"><a class="nav-link" href="contactos.html">Contactos</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html">Salir</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<body>
+    <div class="contenedor">
+        <div class="suelo"></div>
+        <div class="dino dino-corriendo"></div>
+        <div class="score">0</div>
+        <div class="game-over">GAME OVER</div>
+        <button class="btn-restart" onclick="RestartGame()">Volver a jugar</button>
+    </div>
+
+    <audio src="../web.u/sound/sound_moneda.mp3" class="audio-moneda"></audio>
+    <audio src="../web.u/sound/sound_salto.mp3" class="audio-salto"></audio>
+    <audio src="../web.u/sound/sound_gameOver.mp3" class="audio-gameOver"></audio>
+
+    <script>
+        //****** GAME LOOP ********//
+        var time = new Date();
+        var deltaTime = 0;
+
+        if (document.readyState === "complete" || document.readyState === "interactive") {
+            setTimeout(Init, 1);
+        } else {
+            document.addEventListener("DOMContentLoaded", Init);
+        }
+
+        function Init() {
+            time = new Date();
+            Start();
+            Loop();
+        }
+
+        function Loop() {
+            deltaTime = (new Date() - time) / 1000;
+            time = new Date();
+            Update();
+            requestAnimationFrame(Loop);
+        }
+
+        //****** GAME LOGIC ********//
+        var nivelDelMar = 100;
+        var nivelDelMarCubriendo = 60;
+        var velY = 0;
+        var impulso = 900;
+        var impulsoEnAgua = 500;
+        var gravedad = 2500;
+        var densidad = 0.00035;
+        var coeficienteRozamiento = 0.01;
+
+        var dinoPosX = 42;
+        var dinoPosY = nivelDelMar;
+        var sueloX = 0;
+        var velEscenario = 1280 / 3;
+        var gameVel = 1;
+        var score = 0;
+
+        var parado = false;
+        var saltando = false;
+
+        var tiempoHastaObstaculo = 2;
+        var tiempoObstaculoMin = 1.1;
+        var tiempoObstaculoMax = 2.6;
+        var obstaculoPosY = nivelDelMar;
+
+        var tiempoHastaNube = 0.5;
+        var tiempoNubeMin = 0.7;
+        var tiempoNubeMax = 2.7;
+        var velNube = 0.5;
+
+        var suelo = document.querySelector(".suelo");
+        var dino = document.querySelector(".dino");
+        var gameOver = document.querySelector(".game-over");
+        var btnRestart = document.querySelector(".btn-restart");
+        var container = document.querySelector(".contenedor");
+
+        function Start() {
+            document.addEventListener("keydown", HandleKeyDown);
+        }
+
+        function HandleKeyDown(ev) {
+            if (ev.keyCode === 32) {
+                Saltar();
+            }
+        }
+
+        function Saltar() {
+            if (dinoPosY === nivelDelMar) {
+                saltando = true;
+                velY = impulso;
+            }
+        }
+
+        function Update() {
+            if (parado) return;
+
+            MoverDinosaurio();
+            MoverSuelo();
+            DecidirCrearObstaculos();
+            DecidirCrearNubes();
+            MoverObstaculos();
+            MoverNubes();
+            DetectarColision();
+            score += deltaTime * 10;
+            document.querySelector(".score").innerText = Math.floor(score);
+        }
+
+        function MoverDinosaurio() {
+            velY -= gravedad * deltaTime;
+            dinoPosY += velY * deltaTime;
+
+            if (dinoPosY < nivelDelMar) {
+                dinoPosY = nivelDelMar;
+                velY = 0;
+                saltando = false;
+            }
+
+            dino.style.bottom = dinoPosY + "px";
+        }
+
+        function MoverSuelo() {
+            sueloX += CalcularDesplazamiento();
+            suelo.style.backgroundPositionX = -(sueloX % container.offsetWidth) + "px";
+        }
+
+        function CalcularDesplazamiento() {
+            return (velEscenario * deltaTime * gameVel) / 1.5;
+        }
+
+        function Estrellarse() {
+            dino.classList.remove("dino-corriendo");
+            dino.classList.add("dino-estrellado");
+            parado = true;
+        }
+
+        function DecidirCrearObstaculos() {
+            tiempoHastaObstaculo -= deltaTime;
+            if (tiempoHastaObstaculo <= 0) {
+                CrearObstaculo();
+            }
+        }
+
+        function DecidirCrearNubes() {
+            tiempoHastaNube -= deltaTime;
+            if (tiempoHastaNube <= 0) {
+                CrearNube();
+            }
+        }
+
+        function CrearObstaculo() {
+            var obstaculo = document.createElement("div");
+            container.appendChild(obstaculo);
+            obstaculo.classList.add("obstaculo");
+            obstaculo.classList.add(Math.random() > 0.5 ? "obstaculo-flotante" : "obstaculo-hundido");
+            obstaculo.style.left = container.offsetWidth + "px";
+
+            tiempoHastaObstaculo =
+                tiempoObstaculoMin +
+                (Math.random() * (tiempoObstaculoMax - tiempoObstaculoMin)) / gameVel;
+        }
+
+        function CrearNube() {
+            var nube = document.createElement("div");
+            container.appendChild(nube);
+            nube.classList.add("nube");
+            nube.style.left = container.offsetWidth + "px";
+            nube.style.top = Math.random() * container.offsetHeight / 2 + "px";
+            tiempoHastaNube = tiempoNubeMin + Math.random() * (tiempoNubeMax - tiempoNubeMin) / gameVel;
+        }
+
+        function MoverObstaculos() {
+            var obstaculos = document.querySelectorAll(".obstaculo");
+            obstaculos.forEach(function (obstaculo) {
+                if (obstaculo.offsetLeft < -obstaculo.offsetWidth) {
+                    obstaculo.parentNode.removeChild(obstaculo);
+                } else {
+                    obstaculo.style.left =
+                        obstaculo.offsetLeft - CalcularDesplazamiento() * (Math.random() * (1.5 - 0.5) + 0.5) + "px";
+                }
+            });
+        }
+
+        function MoverNubes() {
+            var nubes = document.querySelectorAll(".nube");
+            nubes.forEach(function (nube) {
+                if (nube.offsetLeft < -nube.offsetWidth) {
+                    nube.parentNode.removeChild(nube);
+                } else {
+                    nube.style.left =
+                        nube.offsetLeft - CalcularDesplazamiento() * velNube + "px";
+                }
+            });
+        }
+
+        function DetectarColision() {
+            var obstaculos = document.querySelectorAll(".obstaculo");
+            obstaculos.forEach(function (obstaculo) {
+            var obstaculoRect = obstaculo.getBoundingClientRect();
+            var dinoRect = dino.getBoundingClientRect();
+
+        // Comprobar si el dinosaurio y el obstáculo se superponen horizontal y verticalmente
+            var colisionHorizontal = dinoRect.right > obstaculoRect.left && dinoRect.left < obstaculoRect.right;
+            var colisionVertical = dinoRect.bottom > obstaculoRect.top && dinoRect.top < obstaculoRect.bottom;
+
+                if (colisionHorizontal && colisionVertical) {
+                    GameOver();
+        }
+    });
+}
+
+
+        function GameOver() {
+            Estrellarse();
+            gameOver.style.display = "block";
+            btnRestart.style.display = "block";
+        }
+
+        function RestartGame() {
+            location.reload();
+        }
+    </script>
+</body>
+</html>

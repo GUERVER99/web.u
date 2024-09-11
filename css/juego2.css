@@ -1,0 +1,139 @@
+.hidden {
+    color: transparent;
+}
+
+body {
+    background-color: #4a4063;
+    color: #fff;
+    font-family: 'SF Pixelate', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#wordContainer {
+    margin-top: 20px;
+}
+
+.letter {
+    margin: 0 7px;
+    position: relative;
+    text-align: center;
+}
+
+.letter::after{
+    content: ' ';
+    display: block;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #fff;
+    min-width: 12px;
+}
+
+#startButton {
+    margin-top: 20px;
+    appearance: none;
+    font-family: 'SF Pixelate', sans-serif;
+    border: none;
+    width: 300px;
+    padding: 10px;
+    background: #d95d39;
+    color: #fff;
+    font-weight: 600;
+    font-size: 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+header {
+    background-color: #f8f9fa;
+    /* Cambia el color de fondo según tus preferencias */
+    padding: 5px 0;
+  }
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: space-between;
+  }
+
+  .navbar-brand {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    /* Tamaño de fuente del título */
+    color: #333;
+    /* Color del texto */
+    text-decoration: none;
+    /* Elimina subrayado */
+  }
+
+  .navbar-nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-item {
+    margin-left: 20px;
+    /* Espacio entre elementos de navegación */
+  }
+
+  .nav-link {
+    font-size: 18px;
+    /* Tamaño de fuente de los enlaces */
+    color: #333;
+    /* Color del texto */
+    text-decoration: none;
+    /* Elimina subrayado */
+    transition: color 0.3s ease;
+    /* Transición de color al pasar el ratón */
+  }
+
+  .nav-link:hover {
+    color: #007bff;
+    /* Cambia el color al pasar el ratón */
+  }
+
+  .navbar-toggler {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .navbar-toggler-icon {
+    width: 10px;
+    /* Ancho del ícono */
+    height: 3px;
+    /* Altura del ícono */
+    background-color: #333;
+    /* Color del ícono */
+    display: block;
+  }
+
+  /* Media query para estilos responsivos */
+  @media (max-width: 768px) {
+    .container {
+      padding: 0 5px;
+      /* Reducción del espacio lateral en pantallas pequeñas */
+    }
+
+    .nav-item {
+      margin-left: 10px;
+      /* Espacio entre elementos de navegación en pantallas pequeñas */
+    }
+  }

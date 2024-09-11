@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahorcado</title>
+
+    <link href="http://fonts.cdnfonts.com/css/sf-pixelate" rel="stylesheet">
+    <link rel="stylesheet" href="./css/juego2.css">
+    <script type="text/javascript" src="./js/juego2.js" defer></script>
+    
+</head>
+<header>
+    <nav>
+      <div class="container">
+        <h1 class="navbar-brand">PA-LUDICOS| Interactivos</h1>
+        <button class="navbar-toggler" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active"><a class="nav-link" href="home.php">Inicio</a></li>
+          <li class="nav-item active"><a class="nav-link" href="menu_games.html">Juegos</a></li>
+          <li class="nav-item"><a class="nav-link" href="nosotros.html">Nosotros</a></li>
+          <li class="nav-item"><a class="nav-link" href="contactos.html">Contactos</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html">Salir</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+<body>
+    <h1>AHORCADO</h1>
+    <div class="container">
+        <div id="gameContainer">
+            <canvas id="canvas"></canvas>
+            <div id="usedLetters"></div>
+            <div id="wordContainer"></div>
+        </div>
+        <button id="startButton">START</button>
+    </div>
+</body>
+</html>

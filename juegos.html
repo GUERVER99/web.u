@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/style2.css">
+  <link rel="stylesheet" href="./css/navbar.css">
+  <title>ADIVINA LA IMAGEN</title>
+
+</head>
+<header>
+  <nav>
+    <div class="container">
+      <h1 class="navbar-brand">PA-LUDICOS| Interactivos</h1>
+      <button class="navbar-toggler" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active"><a class="nav-link" href="home.php">Inicio</a></li>
+        <li class="nav-item active"><a class="nav-link" href="menu_games.php">Juegos</a></li>
+        <li class="nav-item"><a class="nav-link" href="nosotros.php">Nosotros</a></li>
+        <li class="nav-item"><a class="nav-link" href="contactos.php">Contactos</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html">Salir</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<body>
+  <h1>ADIVINA LA IMAGEN</h1>
+
+  <!-- Pantalla inicial -->
+  <div id="pantalla-inicial">
+    <p>¿Que tipo de afectacion a la salud se ve en la imagen?</p>
+    <button class="btn" onclick="comenzarJuego()">COMENZAR A JUGAR</button>
+  </div>
+
+  <!-- Pantalla juego -->
+  <div class="pantalla-juego" id="pantalla-juego">
+    <img src="./img/HERIDA.jpg" alt="" id="imgImagen">
+    <div class="opciones">
+      <div class="opcion" id="op0" onclick="comprobarRespuesta(0)">
+        <div class="letra" id="l0">A</div>
+        <div class="nombre" id="n0">OPCION A</div>
+      </div>
+      <div class="opcion" id="op1" onclick="comprobarRespuesta(1)">
+        <div class="letra" id="l1">B</div>
+        <div class="nombre" id="n1">OPCION B</div>
+      </div>
+      <div class="opcion" id="op2" onclick="comprobarRespuesta(2)">
+        <div class="letra" id="l2">C</div>
+        <div class="nombre" id="n2">OPCION C</div>
+      </div>
+    </div>
+  </div>
+  <!-- Pantalla final -->
+  <div id="pantalla-final">
+    <h2>CORRECTAS: <span id="numCorrectas">3</span></h2>
+    <h2>INCORRECTAS: <span id="numIncorrectas">2</span></h2>
+    <button class="btn" onclick="volverAlInicio()">VOLVER AL INICIO</button>
+  </div>
+
+  <script src="./js/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+.hero nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 60px; /* Ajusta según sea necesario */
+    left: 0;
+    width: 100%;
+    background-color: rgb(143, 49, 49);
+    color: white;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all .4s ease;
+    z-index: 2;
+}
+
+.hero nav ul.show {
+    max-height: 800px;
+    overflow: visible;
+    opacity: 1;
+}
+
+.hero nav ul li {
+    margin: 0;
+    text-align: center;
+    width: 100%;
+}
+
+.hero nav ul li a {
+    display: block;
+    padding: 15px;
+    color: white;
+    text-decoration: none;
+}
+
+.hero nav ul li a:hover {
+    background-color: grey;
+}
+
