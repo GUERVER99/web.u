@@ -1,10 +1,10 @@
 
 <?php
 
-$servername = "localhost";
-$username = "root"; // Usuario por defecto en XAMPP
-$password = ""; // Contraseña por defecto en XAMPP, puede estar vacío
-$dbname = "registro_db"; // Nombre de la base de datos
+$servername = "44.202.83.36";
+$username = "debian-sys-maint";
+$password = "1234";
+$dbname = "registro_db";
 
 // Crear la conexión
 $conexion = new mysqli($servername, $username, $password, $dbname);

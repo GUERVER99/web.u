@@ -11,9 +11,9 @@ if (!isset($usuario_id)) {
 }
 
 // Conectar a la base de datos
-$servername = "localhost";
-$username = "root";
-$password = "";
+$servername = "44.202.83.36";
+$username = "debian-sys-maint";
+$password = "1234";
 $dbname = "registro_db";
 
 // Crear la conexión
